@@ -1,0 +1,36 @@
+#!/bin/bash
+
+help() {
+  echo "Zvm - linux virtual machines"
+  echo "  like VirtualBox, powered by Lima"
+  echo ""
+  echo "Usage:"
+  echo "  zvm [global options] command [command options] [arguments...]"
+  echo "  "
+
+  limactl --help
+}
+
+dependency_check() {
+  which limactl >>/dev/null 2>&1
+  if [ "$?" != "0" ]; then
+    zmicro plugin run package install lima
+  fi
+}
+
+core() {
+  dependency_check
+
+  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    help
+    exit 0
+  fi
+
+  limactl $@
+}
+
+run() {
+  core $@
+}
+
+run $@

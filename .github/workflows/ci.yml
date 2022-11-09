@@ -44,7 +44,13 @@ jobs:
             状态: 构建失败（https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}）
 
   testing:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macOS-latest
 
     steps:
       - name: Get Current Date

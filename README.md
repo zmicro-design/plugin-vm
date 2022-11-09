@@ -1,4 +1,4 @@
-# VM - Go Version Manager Plugin for [ZMicro](https://github.com/zcorky/zmicro)
+# VM - Virtual Machine Manager Plugin for [ZMicro](https://github.com/zcorky/zmicro)
 
 [![Release](https://img.shields.io/github/tag/zmicro-design/plugin-vm.svg?label=Release)](https://github.com/zmicro-design/plugin-vm/tags)
 [![Build Status](https://github.com/zmicro-design/plugin-vm/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/zmicro-design/plugin-vm/actions/workflows/test.yml)
@@ -25,26 +25,21 @@ wget -qO- https://raw.githubusercontent.com/zmicro-design/plugin-vm/master/insta
 ## Usage
 
 ```markdown
-Go Version Manager (v1.0.6)
+Virtual Machine Manager (v1.0.3)
 
-Go Version Manager is a tool for managing multiple Go versions.
+VM is a tool for managing virtual machines, based on multipass and lima.
 
 Usage:
-  vm install <version>   - Install Go version
-  vm use <version>       - Use Go version
-  vm remove <version>    - Remove Go version
-  vm ls                  - List all Go versions
-  vm ls-remote           - Show current Go version
-  vm current             - Show current Go version
-  vm help                - Show help
+  vm start <name>         - Start a virtual machine
+  vm stop <name>          - Stop a virtual machine
+  vm restart <name>       - Restart a virtual machine
+  vm remove <name>        - Remove a virtual machine
+  vm exec <name>          - Connect shell to a virtual machine
+  vm inspect <name>       - Inspect a virtual machine
+  vm help                 - Show help
 
 Example:
-  vm install v1.18
-  vm use v1.18
-  vm remove v1.18
-  vm ls
-  vm ls-remote
-  vm current
+  vm start test01
 ```
 
 ## License

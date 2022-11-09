@@ -18,6 +18,7 @@ core() {
   fi
 
   multipass delete $name
+  multipass purge
 }
 
 run() {

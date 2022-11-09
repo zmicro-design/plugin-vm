@@ -1,0 +1,42 @@
+#!/bin/bash
+
+name() {
+  local version=$(plugin::get_version $PLUGIN_VM_NAME)
+  echo "Virtual Machine Manager ($(color::success $version))"
+}
+
+description() {
+  echo "VM is a tool for managing virtual machines, based on multipass and lima."
+}
+
+usage() {
+  echo "Usage:"
+  echo "  vm start <name>         - Start a virtual machine"
+  echo "  vm stop <name>          - Stop a virtual machine"
+  echo "  vm restart <name>       - Restart a virtual machine"
+  echo "  vm remove <name>        - Remove a virtual machine"
+  echo "  vm exec <name>          - Connect shell to a virtual machine"
+  echo "  vm inspect <name>       - Inspect a virtual machine"
+  echo "  vm help                 - Show help"
+}
+
+example() {
+  echo "Example:"
+  echo "  vm start test01"
+}
+
+core() {
+  name
+  echo ""
+  description
+  echo ""
+  usage
+  echo ""
+  example
+}
+
+run() {
+  core $@
+}
+
+run $@

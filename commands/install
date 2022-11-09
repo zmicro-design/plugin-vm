@@ -2,7 +2,7 @@
 
 help() {
   echo "Usage:"
-  echo "  vm install [version]"
+  echo "  zvm install [version]"
   echo ""
   echo "Options:"
   echo "  version    - Install Go version, default: $PLUGIN_VM_GO_DEFAULT_VERSION"

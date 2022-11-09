@@ -2,7 +2,7 @@
 
 help() {
   echo "Usage:"
-  echo "  vm stop <name>"
+  echo "  zvm stop <name>"
 }
 
 core() {

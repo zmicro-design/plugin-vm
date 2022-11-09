@@ -2,7 +2,7 @@
 
 help() {
   echo "Usage:"
-  echo "  vm inspect <name>"
+  echo "  zvm inspect <name>"
 }
 
 core() {

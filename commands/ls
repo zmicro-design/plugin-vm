@@ -2,7 +2,7 @@
 
 help() {
   echo "Usage:"
-  echo "  vm ls"
+  echo "  zvm ls"
 }
 
 core() {

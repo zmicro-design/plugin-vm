@@ -11,18 +11,18 @@ description() {
 
 usage() {
   echo "Usage:"
-  echo "  vm start <name>         - Start a virtual machine"
-  echo "  vm stop <name>          - Stop a virtual machine"
-  echo "  vm restart <name>       - Restart a virtual machine"
-  echo "  vm remove <name>        - Remove a virtual machine"
-  echo "  vm exec <name>          - Connect shell to a virtual machine"
-  echo "  vm inspect <name>       - Inspect a virtual machine"
-  echo "  vm help                 - Show help"
+  echo "  zvm start <name>         - Start a virtual machine"
+  echo "  zvm stop <name>          - Stop a virtual machine"
+  echo "  zvm restart <name>       - Restart a virtual machine"
+  echo "  zvm remove <name>        - Remove a virtual machine"
+  echo "  zvm exec <name>          - Connect shell to a virtual machine"
+  echo "  zvm inspect <name>       - Inspect a virtual machine"
+  echo "  zvm help                 - Show help"
 }
 
 example() {
   echo "Example:"
-  echo "  vm start test01"
+  echo "  zvm start test01"
 }
 
 core() {

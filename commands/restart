@@ -2,7 +2,7 @@
 
 help() {
   echo "Usage:"
-  echo "  vm restart <name>"
+  echo "  zvm restart <name>"
 }
 
 core() {

@@ -30,16 +30,16 @@ Virtual Machine Manager (v1.0.3)
 VM is a tool for managing virtual machines, based on multipass and lima.
 
 Usage:
-  vm start <name>         - Start a virtual machine
-  vm stop <name>          - Stop a virtual machine
-  vm restart <name>       - Restart a virtual machine
-  vm remove <name>        - Remove a virtual machine
-  vm exec <name>          - Connect shell to a virtual machine
-  vm inspect <name>       - Inspect a virtual machine
-  vm help                 - Show help
+  zvm start <name>         - Start a virtual machine
+  zvm stop <name>          - Stop a virtual machine
+  zvm restart <name>       - Restart a virtual machine
+  zvm remove <name>        - Remove a virtual machine
+  zvm exec <name>          - Connect shell to a virtual machine
+  zvm inspect <name>       - Inspect a virtual machine
+  zvm help                 - Show help
 
 Example:
-  vm start test01
+  zvm start test01
 ```
 
 ## License

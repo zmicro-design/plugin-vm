@@ -17,7 +17,13 @@ core() {
     exit 1
   fi
 
+  log::info "[$(timestamp)] starting vm: $name ..."
   multipass launch --cpus 2 --mem 2G --name $name ubuntu
+  if [ "$?" = "0" ]; then
+    log::success "[$(timestamp)] succeed to start vm: $name ."
+  else
+    log::success "[$(timestamp)] failed to start vm: $name ."
+  fi
 }
 
 run() {

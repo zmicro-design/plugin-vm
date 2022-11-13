@@ -17,7 +17,13 @@ core() {
     exit 1
   fi
 
+  log::info "[$(timestamp)] stopping vm: $name ..."
   multipass stop $name
+  if [ "$?" = "0" ]; then
+    log::success "[$(timestamp)] succeed to stop vm: $name ."
+  else
+    log::success "[$(timestamp)] failed to stop vm: $name ."
+  fi
 }
 
 run() {

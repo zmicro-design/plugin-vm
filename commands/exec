@@ -17,6 +17,7 @@ core() {
     exit 1
   fi
 
+  log::info "[$(timestamp)] exec vm: $name ..."
   multipass shell $name
 }
 

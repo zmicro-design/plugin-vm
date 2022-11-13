@@ -17,7 +17,13 @@ core() {
     exit 1
   fi
 
+  log::info "[$(timestamp)] restarting vm: $name ..."
   multipass restart $name
+  if [ "$?" = "0" ]; then
+    log::success "[$(timestamp)] succeed to restart vm: $name ."
+  else
+    log::success "[$(timestamp)] failed to restart vm: $name ."
+  fi
 }
 
 run() {

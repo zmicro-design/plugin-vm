@@ -17,8 +17,15 @@ core() {
     exit 1
   fi
 
-  multipass delete $name
-  multipass purge
+  log::info "[$(timestamp)] removing vm: $name ..."
+
+  multipass delete $name && multipass purge
+  
+  if [ "$?" = "0" ]; then
+    log::success "[$(timestamp)] succeed to remove vm: $name ."
+  else
+    log::success "[$(timestamp)] failed to remove vm: $name ."
+  fi
 }
 
 run() {

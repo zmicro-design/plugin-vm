@@ -1,5 +1,5 @@
 PLUGIN_NAME=vm
-PLUGIN_VERSION=v1.0.5
+PLUGIN_VERSION=v1.0.6
 
 DEPENDENCIES=(
   "^multipass@latest"

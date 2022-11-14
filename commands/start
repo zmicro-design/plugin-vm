@@ -2,7 +2,7 @@
 
 help() {
   echo "Usage:"
-  echo "  zvm start <name> <cpu> <memory> <disk>"
+  echo "  zvm start <name>"
 }
 
 core() {
@@ -12,28 +12,19 @@ core() {
   fi
 
   local name=$1
-  local cpu=$2
-  local memory=$3
-  local disk=$4
   if [ -z "$name" ]; then
-    log::error "[$(timestamp)] name is required"
-    exit 1
-  fi
+    local instances=$(multipass list | grep "Running" | awk '{print $1}')
+    if [ -z "$instances" ]; then
+      log::error "[$(timestamp)] no vm instances available"
+      exit 1
+    fi
 
-  if [ -z "$cpu" ]; then
-    os::inquirer cpu "text" "how many cpu cores you want to share" true 2
-  fi
-
-  if [ -z "$memory" ]; then
-    os::inquirer memory "text" "how many memory(unit: GB) you want to share" true 4
-  fi
-
-  if [ -z "$disk" ]; then
-    os::inquirer disk "text" "how many disk(unit: GB) you want to share" true 10
+    local instancesInq=($instances)
+    os::inquirer name "select" instancesInq "select the instance which you want to start" true
   fi
 
   log::info "[$(timestamp)] starting vm: $name ..."
-  multipass launch --cpus $cpu --mem ${memory}G --disk ${disk}G --name $name ubuntu
+  multipass start $name
   if [ "$?" = "0" ]; then
     log::success "[$(timestamp)] succeed to start vm: $name ."
   else

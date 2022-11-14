@@ -1,0 +1,48 @@
+#!/bin/bash
+
+help() {
+  echo "Usage:"
+  echo "  zvm create <name> <cpu> <memory> <disk>"
+}
+
+core() {
+  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    help
+    exit 0
+  fi
+
+  local name=$1
+  local cpu=$2
+  local memory=$3
+  local disk=$4
+  if [ -z "$name" ]; then
+    log::error "[$(timestamp)] name is required"
+    exit 1
+  fi
+
+  if [ -z "$cpu" ]; then
+    os::inquirer cpu "text" "how many cpu cores you want to share" true 2
+  fi
+
+  if [ -z "$memory" ]; then
+    os::inquirer memory "text" "how many memory(unit: GB) you want to share" true 4
+  fi
+
+  if [ -z "$disk" ]; then
+    os::inquirer disk "text" "how many disk(unit: GB) you want to share" true 10
+  fi
+
+  log::info "[$(timestamp)] starting vm: $name ..."
+  multipass launch --cpus $cpu --mem ${memory}G --disk ${disk}G --name $name ubuntu
+  if [ "$?" = "0" ]; then
+    log::success "[$(timestamp)] succeed to start vm: $name ."
+  else
+    log::success "[$(timestamp)] failed to start vm: $name ."
+  fi
+}
+
+run() {
+  core $@
+}
+
+run $@

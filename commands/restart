@@ -13,8 +13,14 @@ core() {
 
   local name=$1
   if [ -z "$name" ]; then
-    log::error "[$(timestamp)] name is required"
-    exit 1
+    local instances=$(multipass list | grep "Running" | awk '{print $1}')
+    if [ -z "$instances" ]; then
+      log::error "[$(timestamp)] no vm instances available"
+      exit 1
+    fi
+
+    local instancesInq=($instances)
+    os::inquirer name "select" instancesInq "select the instance which you want to restart" true
   fi
 
   log::info "[$(timestamp)] restarting vm: $name ..."

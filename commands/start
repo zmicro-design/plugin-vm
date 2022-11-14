@@ -2,7 +2,7 @@
 
 help() {
   echo "Usage:"
-  echo "  zvm start <name>"
+  echo "  zvm start <name> <cpu> <memory>"
 }
 
 core() {
@@ -12,13 +12,23 @@ core() {
   fi
 
   local name=$1
+  local cpu=$2
+  local memory=$3
   if [ -z "$name" ]; then
     log::error "[$(timestamp)] name is required"
     exit 1
   fi
 
+  if [ -z "$cpu" ]; then
+    os::inquirer cpu "text" "how many cpu cores you want to share" true 2
+  fi
+
+  if [ -z "$memory" ]; then
+    os::inquirer memory "text" "how many memory(unit: GB) you want to share" true 4
+  fi
+
   log::info "[$(timestamp)] starting vm: $name ..."
-  multipass launch --cpus 2 --mem 2G --name $name ubuntu
+  multipass launch --cpus $cpu --mem ${memory}G --name $name ubuntu
   if [ "$?" = "0" ]; then
     log::success "[$(timestamp)] succeed to start vm: $name ."
   else

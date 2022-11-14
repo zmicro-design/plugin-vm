@@ -13,7 +13,7 @@ core() {
 
   local name=$1
   if [ -z "$name" ]; then
-    local instances=$(multipass list | grep "Running" | awk '{print $1}')
+    local instances=$(multipass list | tail -n +2 | awk '{print $1}')
     if [ -z "$instances" ]; then
       log::error "[$(timestamp)] no vm instances available"
       exit 1

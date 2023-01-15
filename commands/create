@@ -72,8 +72,8 @@ core() {
     ;;
   ubuntu:14.04)
     # https://cloud-images.ubuntu.com/releases/trusty/release/
-    # image=https://cloud-images.ubuntu.com/releases/trusty/release/ubuntu-14.04-server-cloudimg-amd64-disk1.img
-    image="https://cloud-images.ubuntu.com/releases/trusty/release/ubuntu-14.04-server-cloudimg-amd64.tar.gz"
+    image=https://cloud-images.ubuntu.com/releases/trusty/release/ubuntu-14.04-server-cloudimg-amd64-disk1.img
+    # image="https://cloud-images.ubuntu.com/releases/trusty/release/ubuntu-14.04-server-cloudimg-amd64.tar.gz"
     ;;
   podman)
     image=docker

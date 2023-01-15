@@ -40,9 +40,13 @@ core() {
       "ubuntu:20.04"
       "ubuntu:18.04"
       "ubuntu:16.04"
+      "ubuntu:14.04"
       "podman"
       "minikube"
       "jellyfin"
+      "centos:8"
+      "centos:7"
+      "centos:6"
     )
     os::inquirer image "select" available_images "which os you want to choose" true 10
   fi
@@ -60,10 +64,25 @@ core() {
     image=18.04
     ;;
   ubuntu:16.04)
+    # issue: https://github.com/canonical/multipass/issues/1029#issuecomment-529126601
+    # cloud images: https://foxi.buduanwang.vip/virtualization/pve/388.html/
     image=https://cdimage.ubuntu.com/ubuntu-core/16/stable/current/ubuntu-core-16-amd64.img.xz
+    ;;
+  ubuntu:14.04)
+    # https://cloud-images.ubuntu.com/releases/trusty/release/
+    image=https://cloud-images.ubuntu.com/releases/trusty/release/ubuntu-14.04-server-cloudimg-amd64-disk1.img
     ;;
   podman)
     image=docker
+    ;;
+  centos:8)
+    image=https://cloud.centos.org/centos/8/x86_64/images/CentOS-8-GenericCloud-8.4.2105-20210603.0.x86_64.qcow2
+    ;;
+  centos:7)
+    image=https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud-1503.qcow2.xz
+    ;;
+  centos:6)
+    image=https://cloud.centos.org/centos/6/images/CentOS-6-x86_64-GenericCloud-1907.qcow2.xz
     ;;
   esac
   log::debug "[$(timestamp)] cmd (multipass launch --cpus $cpu --mem ${memory}G --disk ${disk}G --name $name $image)"

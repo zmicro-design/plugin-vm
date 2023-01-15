@@ -17,6 +17,8 @@ core() {
   local disk=$4
   local image=$5
 
+  local os=$image
+
   if [ -z "$name" ]; then
     log::error "[$(timestamp)] name is required"
     exit 1
@@ -35,7 +37,7 @@ core() {
   fi
 
   if [ -z "$image" ]; then
-    local available_images=(
+    local available_oses=(
       "ubuntu:22.04"
       "ubuntu:20.04"
       "ubuntu:18.04"
@@ -50,12 +52,10 @@ core() {
       "alinux:2"
       "archlinux"
     )
-    os::inquirer image "select" available_images "which os you want to choose" true 10
+    os::inquirer os "select" available_oses "which os you want to choose" true 10
   fi
 
-  log::info "[$(timestamp)] starting vm: $name with image($image) ..."
-
-  case $image in
+  case $os in
   ubuntu:22.04)
     image=ubuntu
     ;;
@@ -66,7 +66,6 @@ core() {
     image=18.04
     ;;
   ubuntu:16.04)
-    # issue: https://github.com/canonical/multipass/issues/1029#issuecomment-529126601
     # cloud images: https://foxi.buduanwang.vip/virtualization/pve/388.html/
     image="https://cdimage.ubuntu.com/ubuntu-core/16/stable/current/ubuntu-core-16-amd64.img.xz"
     ;;
@@ -77,6 +76,12 @@ core() {
     ;;
   podman)
     image=docker
+    ;;
+  minikube)
+    image=minikube
+    ;;
+  jellyfin)
+    image=jellyfin
     ;;
   centos:8)
     # https://developer.aliyun.com/mirror/centos
@@ -93,6 +98,7 @@ core() {
     image="https://alinux2.oss-cn-hangzhou.aliyuncs.com/aliyun_2_1903_x64_20G_nocloud_alibase_20220525.qcow2"
     # min size 20G
     if [ "$disk" = "10" ]; then
+      log::info "[$(timestamp)] disk size current: $disk, but reset min disk size 20G ..."
       disk=20
     fi
     ;;
@@ -102,6 +108,16 @@ core() {
     image="https://mirrors.aliyun.com/archlinux/images/latest/Arch-Linux-x86_64-cloudimg.qcow2"
     ;;
   esac
+
+  if [ "$(os::is_macos)" = "true" ]; then
+    echo "$image" | grep "^https://" >>/dev/null 2>&1
+    if [ "$?" != "0" ]; then
+      log::error "[$(timestamp)] no support os($os) at image($image)."
+      exit 1
+    fi
+  fi
+
+  log::info "[$(timestamp)] starting vm: $name with os($os, image: $image) ..."
   log::debug "[$(timestamp)] cmd (multipass launch --cpus $cpu --mem ${memory}G --disk ${disk}G --name $name $image)"
   multipass launch --cpus $cpu --mem ${memory}G --disk ${disk}G --name $name $image
   if [ "$?" = "0" ]; then
@@ -112,7 +128,7 @@ core() {
 }
 
 run() {
-  core $@
+  core "$@"
 }
 
-run $@
+run "$@"

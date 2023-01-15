@@ -109,10 +109,13 @@ core() {
     ;;
   esac
 
+  # issue:
+  #   https://github.com/canonical/multipass/issues/1593
+  #   https://github.com/canonical/multipass/issues/1260
   if [ "$(os::is_macos)" = "true" ]; then
     echo "$image" | grep "^https://" >>/dev/null 2>&1
     if [ "$?" = "0" ]; then
-      log::error "[$(timestamp)] no support os($os)"
+      log::error "[$(timestamp)] no support os($os) on Mac OS currently."
       exit 1
     fi
   fi

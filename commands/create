@@ -111,8 +111,8 @@ core() {
 
   if [ "$(os::is_macos)" = "true" ]; then
     echo "$image" | grep "^https://" >>/dev/null 2>&1
-    if [ "$?" != "0" ]; then
-      log::error "[$(timestamp)] no support os($os) at image($image)."
+    if [ "$?" = "0" ]; then
+      log::error "[$(timestamp)] no support os($os)"
       exit 1
     fi
   fi

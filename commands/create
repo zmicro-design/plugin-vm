@@ -2,7 +2,7 @@
 
 help() {
   echo "Usage:"
-  echo "  zvm create <name> <cpu> <memory> <disk>"
+  echo "  zvm create <name> [cpu] [memory] [disk] [image]"
 }
 
 core() {
@@ -15,6 +15,8 @@ core() {
   local cpu=$2
   local memory=$3
   local disk=$4
+  local image=$5
+
   if [ -z "$name" ]; then
     log::error "[$(timestamp)] name is required"
     exit 1
@@ -32,8 +34,40 @@ core() {
     os::inquirer disk "text" "how many disk(unit: GB) you want to share" true 10
   fi
 
-  log::info "[$(timestamp)] starting vm: $name ..."
-  multipass launch --cpus $cpu --mem ${memory}G --disk ${disk}G --name $name ubuntu
+  if [ -z "$image" ]; then
+    local available_images=(
+      "ubuntu:22.04"
+      "ubuntu:20.04"
+      "ubuntu:18.04"
+      "ubuntu:16.04"
+      "podman"
+      "minikube"
+      "jellyfin"
+    )
+    os::inquirer image "select" available_images "which os you want to choose" true 10
+  fi
+
+  log::info "[$(timestamp)] starting vm: $name with image($image) ..."
+
+  case $image in
+  ubuntu:22.04)
+    image=ubuntu
+    ;;
+  ubuntu:20.04)
+    image=20.04
+    ;;
+  ubuntu:18.04)
+    image=18.04
+    ;;
+  ubuntu:16.04)
+    image=https://cdimage.ubuntu.com/ubuntu-core/16/stable/current/ubuntu-core-16-amd64.img.xz
+    ;;
+  podman)
+    image=docker
+    ;;
+  esac
+  log::debug "[$(timestamp)] cmd (multipass launch --cpus $cpu --mem ${memory}G --disk ${disk}G --name $name $image)"
+  multipass launch --cpus $cpu --mem ${memory}G --disk ${disk}G --name $name $image
   if [ "$?" = "0" ]; then
     log::success "[$(timestamp)] succeed to start vm: $name ."
   else

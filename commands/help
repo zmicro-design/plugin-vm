@@ -11,18 +11,20 @@ description() {
 
 usage() {
   echo "Usage:"
-  echo "  zvm start <name>         - Start a virtual machine"
-  echo "  zvm stop <name>          - Stop a virtual machine"
-  echo "  zvm restart <name>       - Restart a virtual machine"
-  echo "  zvm remove <name>        - Remove a virtual machine"
-  echo "  zvm exec <name>          - Connect shell to a virtual machine"
-  echo "  zvm inspect <name>       - Inspect a virtual machine"
-  echo "  zvm help                 - Show help"
+  echo "  zmicro vm create <name>        - Create a new virtual machine"
+  echo "  zmicro vm ls                   - List all virtual machines"
+  echo "  zmicro vm start <name>         - Start a virtual machine"
+  echo "  zmicro vm stop <name>          - Stop a virtual machine"
+  echo "  zmicro vm restart <name>       - Restart a virtual machine"
+  echo "  zmicro vm remove <name>        - Remove a virtual machine"
+  echo "  zmicro vm exec <name>          - Connect shell to a virtual machine"
+  echo "  zmicro vm inspect <name>       - Inspect a virtual machine"
+  echo "  zmicro vm help                 - Show help"
 }
 
 example() {
   echo "Example:"
-  echo "  zvm start test01"
+  echo "  zmicro vm start test01"
 }
 
 core() {

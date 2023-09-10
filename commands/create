@@ -57,7 +57,7 @@ core() {
 
   case $os in
   ubuntu:22.04)
-    image=ubuntu
+    image=22.04
     ;;
   ubuntu:20.04)
     image=20.04

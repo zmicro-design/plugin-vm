@@ -120,6 +120,19 @@ core() {
     fi
   fi
 
+  # url
+  local image_filepath=$PLUGIN_VM_IMAGE_CACHE_PATH/$(basename $image)
+  if [ "${image#http}" != "$image" ]; then
+    log::info "[$(timestamp)] downloading image: $image ..."
+    if [ ! -f "$image_filepath" ]; then
+      log::info "[$(timestamp)] downloading image: $image ..."
+      os::wget -c $image $image_filepath
+    fi
+
+    log::info "[$(timestamp)] importing image: $image from $image_filepath ..."
+    image=$image_filepath
+  fi
+
   log::info "[$(timestamp)] starting vm: $name with os($os, image: $image) ..."
   log::debug "[$(timestamp)] cmd (multipass launch --cpus $cpu --mem ${memory}G --disk ${disk}G --name $name $image)"
   multipass launch --cpus $cpu --mem ${memory}G --disk ${disk}G --name $name $image

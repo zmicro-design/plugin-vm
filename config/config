@@ -7,14 +7,7 @@ export PLUGIN_VM_CONFIG=$(plugin::get_app_configs_path $PLUGIN_VM_NAME)/config
 export PLUGIN_VM_VERSIONS=${PLUGIN_VM_DATA}/versions
 export PLUGIN_VM_VERSION_CURRENT=${PLUGIN_VM_DATA}/current
 
-export PLUGIN_VM_GO_DEFAULT_VERSION=v1.18
-export PLIGIN_VM_GO_LTS_VERSION=v1.18
-export PLUGIN_VM_GO_HOME=/usr/local/go
-export PLUGIN_VM_GO_BIN=$PLUGIN_VM_GO_HOME/bin
-export PLUGIN_VM_GO_PATH=$HOME/.go
-export PLUGIN_VM_GO_DOWNLOAD_TMP=/tmp/go.tar.gz
-export PLUGIN_VM_GO_SOURCE_GOOGLE=https://golang.google.cn/dl
-export PLUGIN_VM_GO_SOURCE_QINIU=https://gomirrors.org/dl/go
+export PLUGIN_VM_IMAGE_CACHE_PATH=${PLUGIN_CACHE}/images
 
 if [ ! -d "$PLUGIN_VM_VERSIONS" ]; then
   mkdir -p $PLUGIN_VM_VERSIONS
@@ -26,4 +19,8 @@ fi
 
 if [ ! -d "$PLUGIN_VM_GO_PATH" ]; then
   mkdir -p $PLUGIN_VM_GO_PATH
+fi
+
+if [ ! -d "$PLUGIN_VM_IMAGE_CACHE_PATH" ]; then
+  mkdir -p $PLUGIN_VM_IMAGE_CACHE_PATH
 fi

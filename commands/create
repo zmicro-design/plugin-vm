@@ -123,7 +123,6 @@ core() {
   # url
   local image_filepath=$PLUGIN_VM_IMAGE_CACHE_PATH/$(basename $image)
   if [ "${image#http}" != "$image" ]; then
-    log::info "[$(timestamp)] downloading image: $image ..."
     if [ ! -f "$image_filepath" ]; then
       log::info "[$(timestamp)] downloading image: $image ..."
       os::wget -c $image $image_filepath

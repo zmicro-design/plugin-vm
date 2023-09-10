@@ -82,20 +82,6 @@ vm::version_ensure_prefix_v() {
   echo $version
 }
 
-vm::has() {
-  local version=$1
-  if [ -z "$version" ]; then
-    log::error "[vm::has] version is required"
-    return 1
-  fi
-
-  local path=$PLUGIN_VM_VERSIONS/$version
-  if [ ! -d "$path" ]; then
-    echo "false"
-  else
-    echo "true"
-  fi
-}
 
 export -f vm::os
 export -f vm::arch
@@ -108,5 +94,3 @@ export -f vm::ensure
 export -f vm::version_remove_v
 export -f vm::version_parse
 export -f vm::version_ensure_prefix_v
-
-export -f vm::has

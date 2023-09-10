@@ -125,7 +125,7 @@ core() {
   if [ "${image#http}" != "$image" ]; then
     if [ ! -f "$image_filepath" ]; then
       log::info "[$(timestamp)] downloading image: $image ..."
-      os::wget -c $image $image_filepath
+      os::wget -c $image -O $image_filepath
     fi
 
     log::info "[$(timestamp)] importing image: $image from $image_filepath ..."

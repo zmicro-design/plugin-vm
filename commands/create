@@ -129,7 +129,7 @@ core() {
     fi
 
     log::info "[$(timestamp)] importing image: $image from $image_filepath ..."
-    image=$image_filepath
+    image=file://$image_filepath
   fi
 
   log::info "[$(timestamp)] starting vm: $name with os($os, image: $image) ..."

@@ -134,8 +134,8 @@ core() {
   fi
 
   log::info "[$(timestamp)] starting vm: $name with os($os, image: $image) ..."
-  log::debug "[$(timestamp)] cmd (multipass launch --cpus $cpu --mem ${memory}G --disk ${disk}G --name $name $image)"
-  multipass launch --cpus $cpu --mem ${memory}G --disk ${disk}G --name $name $image
+  log::debug "[$(timestamp)] cmd (multipass launch --cpus $cpu --memory ${memory}G --disk ${disk}G --name $name $image)"
+  multipass launch --cpus $cpu --memory ${memory}G --disk ${disk}G --name $name $image
   if [ "$?" = "0" ]; then
     log::success "[$(timestamp)] succeed to start vm: $name ."
   else

@@ -38,6 +38,7 @@ core() {
 
   if [ -z "$image" ]; then
     local available_oses=(
+      "ubuntu:24.04"
       "ubuntu:22.04"
       "ubuntu:20.04"
       "ubuntu:18.04"
@@ -56,6 +57,9 @@ core() {
   fi
 
   case $os in
+  ubuntu:24.04)
+    image=24.04
+    ;;
   ubuntu:22.04)
     image=22.04
     ;;

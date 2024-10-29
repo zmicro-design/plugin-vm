@@ -44,8 +44,9 @@ core() {
       "ubuntu:18.04"
       "ubuntu:16.04"
       "ubuntu:14.04"
-      "podman"
+      "docker"
       "minikube"
+      "podman"
       "jellyfin"
       "centos:8"
       "centos:7"
@@ -77,6 +78,9 @@ core() {
     # https://cloud-images.ubuntu.com/releases/trusty/release/
     image=https://cloud-images.ubuntu.com/releases/trusty/release/ubuntu-14.04-server-cloudimg-amd64-disk1.img
     # image="https://cloud-images.ubuntu.com/releases/trusty/release/ubuntu-14.04-server-cloudimg-amd64.tar.gz"
+    ;;
+  docker)
+    image=docker
     ;;
   podman)
     image=docker
